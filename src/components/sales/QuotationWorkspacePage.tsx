@@ -457,15 +457,15 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
       {/* Top Breadcrumb & Header Bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 text-xs text-slate-400 mb-1.5">
-            <button onClick={onBack} className="hover:text-emerald-400 flex items-center gap-1 cursor-pointer font-medium">
+          <div className={`flex items-center gap-2 text-xs mb-1.5 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            <button onClick={onBack} className="hover:text-emerald-600 flex items-center gap-1 cursor-pointer font-semibold">
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Quotations Directory</span>
             </button>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-            <span className="font-mono font-bold text-teal-400">{quote.quotationNumber}</span>
-            <span className="text-slate-600">/</span>
-            <span className="text-slate-300 font-semibold">{quote.customerName}</span>
+            <ChevronRight className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-600' : 'text-slate-400'}`} />
+            <span className={`font-mono font-bold ${darkMode ? 'text-teal-400' : 'text-teal-700'}`}>{quote.quotationNumber}</span>
+            <span className={darkMode ? 'text-slate-600' : 'text-slate-400'}>/</span>
+            <span className={`font-bold ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>{quote.customerName}</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -480,10 +480,12 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               title="Copy Quotation Number"
             >
               <Copy className="w-3.5 h-3.5" />
-              {copiedId ? <span className="text-emerald-400 text-[10px]">Copied!</span> : null}
+              {copiedId ? <span className="text-emerald-500 text-[10px] font-bold">Copied!</span> : null}
             </button>
 
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-teal-500/15 text-teal-400 border border-teal-500/30">
+            <span className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold border ${
+              darkMode ? 'bg-teal-500/15 text-teal-400 border-teal-500/30' : 'bg-teal-50 text-teal-800 border-teal-300'
+            }`}>
               Rev {quote.revision || 1}
             </span>
 
@@ -498,16 +500,18 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
           <button
             onClick={() => setShowPrintModal(true)}
             className={`px-3.5 py-2 rounded-xl border text-xs font-bold flex items-center space-x-1.5 transition-all cursor-pointer ${
-              darkMode ? 'bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700 hover:text-white' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm'
+              darkMode ? 'bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700 hover:text-white' : 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50 shadow-sm'
             }`}
           >
-            <Printer className="w-3.5 h-3.5 text-teal-400" />
+            <Printer className={`w-3.5 h-3.5 ${darkMode ? 'text-teal-400' : 'text-teal-700'}`} />
             <span>Formal Quote Letter / Print</span>
           </button>
 
           <button
             onClick={() => setShowRevisionModal(true)}
-            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-600/15 text-amber-400 hover:bg-amber-600 hover:text-white border border-amber-500/30 flex items-center space-x-1.5 transition-all cursor-pointer shadow-sm"
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold border flex items-center space-x-1.5 transition-all cursor-pointer shadow-sm ${
+              darkMode ? 'bg-amber-600/15 text-amber-400 hover:bg-amber-600 hover:text-white border-amber-500/30' : 'bg-amber-50 text-amber-900 border-amber-300 hover:bg-amber-100'
+            }`}
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Create Revision</span>
@@ -516,10 +520,10 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
           <button
             onClick={() => setShowEditModal(true)}
             className={`px-3.5 py-2 rounded-xl border text-xs font-bold flex items-center space-x-1.5 transition-all cursor-pointer ${
-              darkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+              darkMode ? 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700' : 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50'
             }`}
           >
-            <Edit3 className="w-3.5 h-3.5 text-slate-400" />
+            <Edit3 className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`} />
             <span>Edit</span>
           </button>
 
@@ -532,7 +536,9 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               <span>Convert to Sales Order</span>
             </button>
           ) : (
-            <div className="px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
+            <div className={`px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 ${
+              darkMode ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' : 'bg-emerald-50 border-emerald-300 text-emerald-800'
+            }`}>
               <CheckCircle className="w-4 h-4" />
               <span>Converted to Sales Order</span>
             </div>
@@ -543,12 +549,12 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
       {/* Quotation Lifecycle Stepper Bar */}
       <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+          <span className={`text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>
+            <Sparkles className={`w-3.5 h-3.5 ${darkMode ? 'text-teal-400' : 'text-teal-700'}`} />
             Quotation Lifecycle & Commercial Pipeline
           </span>
-          <span className="text-[11px] font-semibold text-slate-500">
-            Valid Until: <strong className="text-slate-300">{quote.validUntil || 'N/A'}</strong>
+          <span className={`text-[11px] font-semibold ${darkMode ? 'text-slate-500' : 'text-slate-600'}`}>
+            Valid Until: <strong className={darkMode ? 'text-slate-300' : 'text-slate-900'}>{quote.validUntil || 'N/A'}</strong>
           </span>
         </div>
 
@@ -568,18 +574,20 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                   isCurrent
                     ? 'bg-teal-600 border-teal-500 text-white font-bold shadow-md shadow-teal-600/20'
                     : isDone
-                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 font-semibold'
+                    ? darkMode
+                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 font-semibold'
+                      : 'bg-emerald-50 border-emerald-300 text-emerald-800 font-bold'
                     : darkMode
                     ? 'bg-slate-800/40 border-slate-700/60 text-slate-400 hover:border-slate-600'
-                    : 'bg-slate-50 border-slate-200 text-slate-500 hover:border-slate-300'
+                    : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300 font-semibold'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold">{stg.label}</span>
-                  {isDone && <Check className="w-3.5 h-3.5 text-emerald-400" />}
+                  {isDone && <Check className={`w-3.5 h-3.5 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`} />}
                   {isCurrent && <span className="w-2 h-2 rounded-full bg-white animate-pulse" />}
                 </div>
-                <span className="text-[10px] opacity-75 mt-0.5 block">
+                <span className="text-[10px] opacity-90 mt-0.5 block font-medium">
                   {isCurrent ? 'Current Active State' : isDone ? 'Completed' : 'Click to Set'}
                 </span>
               </button>
@@ -591,41 +599,41 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
       {/* KPI Metrics Summary Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Total Quoted Value</span>
-            <IndianRupee className="w-4 h-4 text-emerald-400" />
+          <div className={`flex items-center justify-between mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700 font-bold'}`}>
+            <span className="text-xs">Total Quoted Value</span>
+            <IndianRupee className={`w-4 h-4 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`} />
           </div>
-          <div className="text-xl font-black text-emerald-500">₹{baseAmount.toLocaleString('en-IN')}</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">₹{grandTotal.toLocaleString('en-IN')} incl. 18% GST</div>
+          <div className={`text-xl font-black ${darkMode ? 'text-emerald-500' : 'text-emerald-700'}`}>₹{baseAmount.toLocaleString('en-IN')}</div>
+          <div className={`text-[11px] mt-0.5 ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>₹{grandTotal.toLocaleString('en-IN')} incl. 18% GST</div>
         </div>
 
         <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Unit Price / Box</span>
-            <Package className="w-4 h-4 text-teal-400" />
+          <div className={`flex items-center justify-between mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700 font-bold'}`}>
+            <span className="text-xs">Unit Price / Box</span>
+            <Package className={`w-4 h-4 ${darkMode ? 'text-teal-400' : 'text-teal-700'}`} />
           </div>
           <div className={`text-xl font-black ${darkMode ? 'text-white' : 'text-slate-900'}`}>₹{unitPriceCalculated}</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Based on {expectedQty.toLocaleString()} units</div>
+          <div className={`text-[11px] mt-0.5 ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Based on {expectedQty.toLocaleString()} units</div>
         </div>
 
         <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Gross Profit Margin</span>
-            <Percent className="w-4 h-4 text-amber-400" />
+          <div className={`flex items-center justify-between mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700 font-bold'}`}>
+            <span className="text-xs">Gross Profit Margin</span>
+            <Percent className={`w-4 h-4 ${darkMode ? 'text-amber-400' : 'text-amber-700'}`} />
           </div>
-          <div className="text-xl font-black text-amber-400">{grossProfitMargin}%</div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Est. Contribution: ₹{grossProfit.toLocaleString('en-IN')}</div>
+          <div className={`text-xl font-black ${darkMode ? 'text-amber-400' : 'text-amber-700'}`}>{grossProfitMargin}%</div>
+          <div className={`text-[11px] mt-0.5 ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Est. Contribution: ₹{grossProfit.toLocaleString('en-IN')}</div>
         </div>
 
         <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
-          <div className="flex items-center justify-between text-slate-400 mb-1">
-            <span className="text-xs font-semibold">Executive & Validity</span>
-            <User className="w-4 h-4 text-blue-400" />
+          <div className={`flex items-center justify-between mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700 font-bold'}`}>
+            <span className="text-xs">Executive & Validity</span>
+            <User className={`w-4 h-4 ${darkMode ? 'text-blue-400' : 'text-blue-700'}`} />
           </div>
           <div className={`text-sm font-bold truncate ${darkMode ? 'text-white' : 'text-slate-900'}`}>
             {quote.salesExecutive || 'Rajesh Sharma'}
           </div>
-          <div className="text-[11px] text-slate-500 mt-0.5">Quote Date: {quote.quotationDate || 'N/A'}</div>
+          <div className={`text-[11px] mt-0.5 ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Quote Date: {quote.quotationDate || 'N/A'}</div>
         </div>
       </div>
 
@@ -648,7 +656,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                   ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20'
                   : darkMode
                   ? 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -667,16 +675,16 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             <div className={`p-5 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <div className="flex items-center justify-between mb-4">
                 <h3 className={`text-sm font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                  <FileSpreadsheet className="w-4 h-4 text-teal-400" />
+                  <FileSpreadsheet className={`w-4 h-4 ${darkMode ? 'text-teal-400' : 'text-teal-700'}`} />
                   Commercial Proposal & Line Item Schedule
                 </h3>
-                <span className="text-xs font-mono text-slate-400">Currency: INR (₹)</span>
+                <span className={`text-xs font-mono ${darkMode ? 'text-slate-400' : 'text-slate-600 font-semibold'}`}>Currency: INR (₹)</span>
               </div>
 
-              <div className="overflow-x-auto rounded-xl border border-slate-700/50">
+              <div className={`overflow-x-auto rounded-xl border ${darkMode ? 'border-slate-700/50' : 'border-slate-200'}`}>
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className={`border-b font-bold uppercase tracking-wider ${darkMode ? 'border-slate-800 bg-slate-800/80 text-slate-400' : 'border-slate-200 bg-slate-50 text-slate-600'}`}>
+                    <tr className={`border-b font-bold uppercase tracking-wider ${darkMode ? 'border-slate-800 bg-slate-800/80 text-slate-400' : 'border-slate-200 bg-slate-100 text-slate-700'}`}>
                       <th className="p-3">#</th>
                       <th className="p-3">Item Description / Corrugated Specification</th>
                       <th className="p-3 text-right">Order Qty</th>
@@ -684,22 +692,22 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                       <th className="p-3 text-right">Basic Total (₹)</th>
                     </tr>
                   </thead>
-                  <tbody className={`divide-y ${darkMode ? 'divide-slate-800' : 'divide-slate-100'}`}>
+                  <tbody className={`divide-y ${darkMode ? 'divide-slate-800' : 'divide-slate-200'}`}>
                     <tr>
-                      <td className="p-3 text-slate-500 font-mono">01</td>
+                      <td className={`p-3 font-mono ${darkMode ? 'text-slate-500' : 'text-slate-600 font-bold'}`}>01</td>
                       <td className="p-3 font-semibold">
-                        <div className={`${darkMode ? 'text-white' : 'text-slate-900'}`}>{quote.productName}</div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
+                        <div className={darkMode ? 'text-white' : 'text-slate-900 font-bold'}>{quote.productName}</div>
+                        <div className={`text-[11px] mt-0.5 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
                           {quote.costingSummary || 'Standard 3-Ply / 5-Ply Corrugated Box with flexo printing & varnishing'}
                         </div>
                       </td>
-                      <td className="p-3 text-right font-mono font-bold text-slate-300">
+                      <td className={`p-3 text-right font-mono font-bold ${darkMode ? 'text-slate-300' : 'text-slate-900'}`}>
                         {expectedQty.toLocaleString()} Pcs
                       </td>
-                      <td className="p-3 text-right font-mono font-bold text-teal-400">
+                      <td className={`p-3 text-right font-mono font-bold ${darkMode ? 'text-teal-400' : 'text-teal-700'}`}>
                         ₹{unitPriceCalculated}
                       </td>
-                      <td className="p-3 text-right font-mono font-extrabold text-emerald-400">
+                      <td className={`p-3 text-right font-mono font-extrabold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
                         ₹{baseAmount.toLocaleString('en-IN')}
                       </td>
                     </tr>
@@ -708,23 +716,23 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               </div>
 
               {/* Pricing Totals Box */}
-              <div className="mt-4 pt-4 border-t border-slate-700/60 flex flex-col sm:flex-row sm:justify-end">
+              <div className={`mt-4 pt-4 border-t flex flex-col sm:flex-row sm:justify-end ${darkMode ? 'border-slate-700/60' : 'border-slate-200'}`}>
                 <div className="w-full sm:w-72 space-y-2 text-xs">
-                  <div className="flex justify-between text-slate-400">
+                  <div className={`flex justify-between ${darkMode ? 'text-slate-400' : 'text-slate-700 font-medium'}`}>
                     <span>Taxable Basic Amount:</span>
-                    <span className="font-mono font-bold text-slate-200">₹{baseAmount.toLocaleString('en-IN')}</span>
+                    <span className={`font-mono font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>₹{baseAmount.toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="flex justify-between text-slate-400">
+                  <div className={`flex justify-between ${darkMode ? 'text-slate-400' : 'text-slate-700 font-medium'}`}>
                     <span>CGST (9%):</span>
-                    <span className="font-mono font-semibold">₹{(gstAmount / 2).toLocaleString('en-IN')}</span>
+                    <span className={`font-mono font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-900'}`}>₹{(gstAmount / 2).toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="flex justify-between text-slate-400">
+                  <div className={`flex justify-between ${darkMode ? 'text-slate-400' : 'text-slate-700 font-medium'}`}>
                     <span>SGST / IGST (9%):</span>
-                    <span className="font-mono font-semibold">₹{(gstAmount / 2).toLocaleString('en-IN')}</span>
+                    <span className={`font-mono font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-900'}`}>₹{(gstAmount / 2).toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="pt-2 border-t border-slate-700 flex justify-between font-bold text-sm">
-                    <span className="text-white">Net Quotation Total:</span>
-                    <span className="font-mono text-emerald-400 text-base">₹{grandTotal.toLocaleString('en-IN')}</span>
+                  <div className={`pt-2 border-t flex justify-between font-bold text-sm ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
+                    <span className={darkMode ? 'text-white' : 'text-slate-900'}>Net Quotation Total:</span>
+                    <span className={`font-mono text-base ${darkMode ? 'text-emerald-400' : 'text-emerald-700 font-extrabold'}`}>₹{grandTotal.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
               </div>
@@ -733,40 +741,40 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             {/* Manufacturing & Corrugation Box Specs */}
             <div className={`p-5 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <h3 className={`text-sm font-bold mb-4 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <Package className="w-4 h-4 text-emerald-400" />
+                <Package className={`w-4 h-4 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`} />
                 Packaging Box Engineering Specifications
               </h3>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
                 <div className={`p-3 rounded-xl border ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Box Dimensions</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Box Dimensions</span>
                   <p className="font-bold font-mono mt-1">450 × 300 × 280 mm</p>
-                  <span className="text-[10px] text-slate-500">Outer Box (OD)</span>
+                  <span className={`text-[10px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Outer Box (OD)</span>
                 </div>
                 <div className={`p-3 rounded-xl border ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Board Structure</span>
-                  <p className="font-bold mt-1 text-teal-400">5-Ply Universal</p>
-                  <span className="text-[10px] text-slate-500">Narrow + Broad Flute</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Board Structure</span>
+                  <p className={`font-bold mt-1 ${darkMode ? 'text-teal-400' : 'text-teal-700'}`}>5-Ply Universal</p>
+                  <span className={`text-[10px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Narrow + Broad Flute</span>
                 </div>
                 <div className={`p-3 rounded-xl border ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Paper GSM Combination</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Paper GSM Combination</span>
                   <p className="font-bold font-mono mt-1">180K / 140F / 140K</p>
-                  <span className="text-[10px] text-slate-500">Virgin Kraft Liner</span>
+                  <span className={`text-[10px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Virgin Kraft Liner</span>
                 </div>
                 <div className={`p-3 rounded-xl border ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Bursting Strength</span>
-                  <p className="font-bold font-mono mt-1 text-emerald-400">12.5 kg/cm²</p>
-                  <span className="text-[10px] text-slate-500">Burst Factor: 22 BF</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Bursting Strength</span>
+                  <p className={`font-bold font-mono mt-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>12.5 kg/cm²</p>
+                  <span className={`text-[10px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Burst Factor: 22 BF</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs mt-3">
                 <div className={`p-3 rounded-xl border ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Printing & Finishing</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Printing & Finishing</span>
                   <p className="font-semibold mt-1">2-Color Flexographic Printing (Water-based ink) + Varnishing</p>
                 </div>
                 <div className={`p-3 rounded-xl border ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Joint & Binding</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Joint & Binding</span>
                   <p className="font-semibold mt-1">Glue Lap Joint + Copper Coated Stitching (Heavy Duty)</p>
                 </div>
               </div>
@@ -775,25 +783,25 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             {/* Standard Terms & Conditions */}
             <div className={`p-5 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <h3 className={`text-sm font-bold mb-3 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <ShieldCheck className="w-4 h-4 text-teal-400" />
+                <ShieldCheck className={`w-4 h-4 ${darkMode ? 'text-teal-400' : 'text-teal-700'}`} />
                 Commercial Terms & Packaging Guidelines
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div className="space-y-1">
-                  <span className="font-bold text-slate-400">Payment Terms:</span>
-                  <p className="text-slate-200">30 Days Net from date of Delivery Challan / Invoice</p>
+                  <span className={`font-bold ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Payment Terms:</span>
+                  <p className={darkMode ? 'text-slate-200' : 'text-slate-800 font-medium'}>30 Days Net from date of Delivery Challan / Invoice</p>
                 </div>
                 <div className="space-y-1">
-                  <span className="font-bold text-slate-400">Delivery Lead Time:</span>
-                  <p className="text-slate-200">7-10 Business Days post PO & artwork approval</p>
+                  <span className={`font-bold ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Delivery Lead Time:</span>
+                  <p className={darkMode ? 'text-slate-200' : 'text-slate-800 font-medium'}>7-10 Business Days post PO & artwork approval</p>
                 </div>
                 <div className="space-y-1">
-                  <span className="font-bold text-slate-400">Freight & Transit:</span>
-                  <p className="text-slate-200">Door delivery included within 50 KM radius of Plant</p>
+                  <span className={`font-bold ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Freight & Transit:</span>
+                  <p className={darkMode ? 'text-slate-200' : 'text-slate-800 font-medium'}>Door delivery included within 50 KM radius of Plant</p>
                 </div>
                 <div className="space-y-1">
-                  <span className="font-bold text-slate-400">Quantity Tolerance:</span>
-                  <p className="text-slate-200">±5% variation in final dispatched quantity acceptable</p>
+                  <span className={`font-bold ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Quantity Tolerance:</span>
+                  <p className={darkMode ? 'text-slate-200' : 'text-slate-800 font-medium'}>±5% variation in final dispatched quantity acceptable</p>
                 </div>
               </div>
             </div>
@@ -804,39 +812,39 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             {/* Customer Dossier Card */}
             <div className={`p-5 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <h3 className={`text-sm font-bold mb-3 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <Building2 className="w-4 h-4 text-blue-400" />
+                <Building2 className={`w-4 h-4 ${darkMode ? 'text-blue-400' : 'text-blue-700'}`} />
                 Customer Account Details
               </h3>
 
               <div className="space-y-3 text-xs">
                 <div>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">Customer Name</span>
+                  <span className={`text-[10px] font-bold uppercase ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Customer Name</span>
                   <p className={`font-bold text-sm mt-0.5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
                     {quote.customerName}
                   </p>
                   {quote.customer?.code && (
-                    <span className="text-[10px] font-mono text-teal-400">{quote.customer.code}</span>
+                    <span className={`text-[10px] font-mono font-bold ${darkMode ? 'text-teal-400' : 'text-teal-700'}`}>{quote.customer.code}</span>
                   )}
                 </div>
 
-                <div className="pt-2 border-t border-slate-800 space-y-2">
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <User className="w-3.5 h-3.5 text-slate-500" />
+                <div className={`pt-2 border-t space-y-2 ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
+                  <div className={`flex items-center gap-2 font-medium ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>
+                    <User className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`} />
                     <span>{quote.customer?.contactPerson || quote.lead?.contactPerson || 'Procurement Manager'}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Phone className="w-3.5 h-3.5 text-slate-500" />
+                  <div className={`flex items-center gap-2 font-medium ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>
+                    <Phone className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`} />
                     <span>{quote.customer?.phone || quote.lead?.phone || '+91 98450 12345'}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-slate-300">
-                    <Mail className="w-3.5 h-3.5 text-slate-500" />
+                  <div className={`flex items-center gap-2 font-medium ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>
+                    <Mail className={`w-3.5 h-3.5 ${darkMode ? 'text-slate-500' : 'text-slate-500'}`} />
                     <span>{quote.customer?.email || quote.lead?.email || 'procurement@client.com'}</span>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-slate-800">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">Delivery & Billing Plant</span>
-                  <p className="text-slate-300 mt-0.5">
+                <div className={`pt-2 border-t ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
+                  <span className={`text-[10px] font-bold uppercase ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Delivery & Billing Plant</span>
+                  <p className={`mt-0.5 font-medium ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>
                     {quote.customer?.address || 'Industrial Area Phase 2, Peenya, Bengaluru'}
                   </p>
                 </div>
@@ -846,27 +854,27 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             {/* Linked Lead & Production Pipeline Card */}
             <div className={`p-5 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <h3 className={`text-sm font-bold mb-3 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <Layers className="w-4 h-4 text-purple-400" />
+                <Layers className={`w-4 h-4 ${darkMode ? 'text-purple-400' : 'text-purple-700'}`} />
                 Pipeline & Lead Traceability
               </h3>
 
               {quote.leadId ? (
                 <div className="space-y-3 text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Originated from Lead:</span>
-                    <span className="font-mono font-bold text-blue-400">{quote.lead?.leadNumber || quote.leadId}</span>
+                    <span className={darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}>Originated from Lead:</span>
+                    <span className={`font-mono font-bold ${darkMode ? 'text-blue-400' : 'text-blue-700'}`}>{quote.lead?.leadNumber || quote.leadId}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Current Lead Status:</span>
-                    <span className="font-bold text-emerald-400">{quote.lead?.status || 'Active'}</span>
+                    <span className={darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}>Current Lead Status:</span>
+                    <span className={`font-bold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>{quote.lead?.status || 'Active'}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-slate-400">Customer PO Ref:</span>
-                    <span className="font-mono font-bold text-slate-200">{quote.lead?.customerPoNumber || 'Pending PO'}</span>
+                    <span className={darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}>Customer PO Ref:</span>
+                    <span className={`font-mono font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>{quote.lead?.customerPoNumber || 'Pending PO'}</span>
                   </div>
                 </div>
               ) : (
-                <p className="text-xs text-slate-400">
+                <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}`}>
                   Direct quotation created from quotation module without prior lead tracking.
                 </p>
               )}
@@ -875,27 +883,33 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             {/* Quick Status Action Panel */}
             <div className={`p-5 rounded-2xl border ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <h3 className={`text-sm font-bold mb-3 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Sparkles className={`w-4 h-4 ${darkMode ? 'text-amber-400' : 'text-amber-700'}`} />
                 Quick Stage Actions
               </h3>
               <div className="space-y-2">
                 <button
                   onClick={() => handleStatusChange('Proposal Sent', 'Proposal dispatched to customer email')}
-                  className="w-full py-2 px-3 rounded-xl text-xs font-semibold bg-blue-600/15 hover:bg-blue-600 hover:text-white text-blue-400 border border-blue-500/20 text-left flex items-center justify-between transition-all cursor-pointer"
+                  className={`w-full py-2 px-3 rounded-xl text-xs font-semibold border text-left flex items-center justify-between transition-all cursor-pointer ${
+                    darkMode ? 'bg-blue-600/15 hover:bg-blue-600 hover:text-white text-blue-400 border-blue-500/20' : 'bg-blue-50 hover:bg-blue-100 text-blue-900 border-blue-200'
+                  }`}
                 >
                   <span>Mark as "Proposal Sent"</span>
                   <Send className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => handleStatusChange('Accepted', 'Customer accepted terms and confirmed pricing')}
-                  className="w-full py-2 px-3 rounded-xl text-xs font-semibold bg-emerald-600/15 hover:bg-emerald-600 hover:text-white text-emerald-400 border border-emerald-500/20 text-left flex items-center justify-between transition-all cursor-pointer"
+                  className={`w-full py-2 px-3 rounded-xl text-xs font-semibold border text-left flex items-center justify-between transition-all cursor-pointer ${
+                    darkMode ? 'bg-emerald-600/15 hover:bg-emerald-600 hover:text-white text-emerald-400 border-emerald-500/20' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border-emerald-200'
+                  }`}
                 >
                   <span>Mark as "Customer Accepted"</span>
                   <CheckCircle className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => setShowRevisionModal(true)}
-                  className="w-full py-2 px-3 rounded-xl text-xs font-semibold bg-amber-600/15 hover:bg-amber-600 hover:text-white text-amber-400 border border-amber-500/20 text-left flex items-center justify-between transition-all cursor-pointer"
+                  className={`w-full py-2 px-3 rounded-xl text-xs font-semibold border text-left flex items-center justify-between transition-all cursor-pointer ${
+                    darkMode ? 'bg-amber-600/15 hover:bg-amber-600 hover:text-white text-amber-400 border-amber-500/20' : 'bg-amber-50 hover:bg-amber-100 text-amber-900 border-amber-200'
+                  }`}
                 >
                   <span>Revise Pricing (Negotiation)</span>
                   <RotateCcw className="w-3.5 h-3.5" />
@@ -912,80 +926,82 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className={`md:col-span-2 p-5 rounded-2xl border space-y-4 ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <h3 className={`text-sm font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <DollarSign className="w-4 h-4 text-emerald-400" />
+                <DollarSign className={`w-4 h-4 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`} />
                 Detailed Cost Breakdown & Raw Material Estimation
               </h3>
 
               <div className="space-y-3 text-xs">
                 <div className={`p-3.5 rounded-xl border flex items-center justify-between ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
                   <div>
-                    <span className="font-bold text-slate-200">1. Kraft Paper & Fluting Medium Board Cost</span>
-                    <p className="text-slate-500 text-[11px]">180 GSM Kraft + 140 GSM Fluting (Calculated by Reel deckle & weight)</p>
+                    <span className={`font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>1. Kraft Paper & Fluting Medium Board Cost</span>
+                    <p className={`text-[11px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>180 GSM Kraft + 140 GSM Fluting (Calculated by Reel deckle & weight)</p>
                   </div>
-                  <span className="font-mono font-bold text-slate-200">₹{paperCost.toLocaleString('en-IN')} (62%)</span>
+                  <span className={`font-mono font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>₹{paperCost.toLocaleString('en-IN')} (62%)</span>
                 </div>
 
                 <div className={`p-3.5 rounded-xl border flex items-center justify-between ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
                   <div>
-                    <span className="font-bold text-slate-200">2. Conversion, Starch Glue & Processing</span>
-                    <p className="text-slate-500 text-[11px]">Corrugator steam, maize starch adhesive, electricity & labor</p>
+                    <span className={`font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>2. Conversion, Starch Glue & Processing</span>
+                    <p className={`text-[11px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Corrugator steam, maize starch adhesive, electricity & labor</p>
                   </div>
-                  <span className="font-mono font-bold text-slate-200">₹{conversionCost.toLocaleString('en-IN')} (16%)</span>
+                  <span className={`font-mono font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>₹{conversionCost.toLocaleString('en-IN')} (16%)</span>
                 </div>
 
                 <div className={`p-3.5 rounded-xl border flex items-center justify-between ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
                   <div>
-                    <span className="font-bold text-slate-200">3. Printing Plates, Inks & Strapping Materials</span>
-                    <p className="text-slate-500 text-[11px]">Polymer flexo stereo, water ink, wire stitching & strapping</p>
+                    <span className={`font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>3. Printing Plates, Inks & Strapping Materials</span>
+                    <p className={`text-[11px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Polymer flexo stereo, water ink, wire stitching & strapping</p>
                   </div>
-                  <span className="font-mono font-bold text-slate-200">₹{(transportCost * 0.6).toFixed(0)} (3%)</span>
+                  <span className={`font-mono font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>₹{(transportCost * 0.6).toFixed(0)} (3%)</span>
                 </div>
 
                 <div className={`p-3.5 rounded-xl border flex items-center justify-between ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
                   <div>
-                    <span className="font-bold text-slate-200">4. Freight, Palletization & Logistics</span>
-                    <p className="text-slate-500 text-[11px]">Direct truck delivery to customer plant site</p>
+                    <span className={`font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>4. Freight, Palletization & Logistics</span>
+                    <p className={`text-[11px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-medium'}`}>Direct truck delivery to customer plant site</p>
                   </div>
-                  <span className="font-mono font-bold text-slate-200">₹{transportCost.toLocaleString('en-IN')} (5%)</span>
+                  <span className={`font-mono font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>₹{transportCost.toLocaleString('en-IN')} (5%)</span>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-800 flex justify-between items-center text-xs">
-                <span className="font-bold text-slate-400">Total Factory Manufacturing Cost:</span>
-                <span className="font-mono font-extrabold text-sm text-slate-200">₹{totalCost.toLocaleString('en-IN')}</span>
+              <div className={`pt-4 border-t flex justify-between items-center text-xs ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
+                <span className={`font-bold ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Total Factory Manufacturing Cost:</span>
+                <span className={`font-mono font-extrabold text-sm ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>₹{totalCost.toLocaleString('en-IN')}</span>
               </div>
             </div>
 
             {/* Profit & Margin Card */}
             <div className={`p-5 rounded-2xl border space-y-4 ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
               <h3 className={`text-sm font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                <TrendingUp className="w-4 h-4 text-teal-400" />
+                <TrendingUp className={`w-4 h-4 ${darkMode ? 'text-teal-400' : 'text-teal-700'}`} />
                 Profitability & Margin Summary
               </h3>
 
               <div className="space-y-4 text-xs">
-                <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-                  <span className="text-[11px] font-bold text-slate-400 uppercase">Gross Margin %</span>
-                  <div className="text-3xl font-black text-emerald-400 mt-1">{grossProfitMargin}%</div>
-                  <p className="text-[10px] text-emerald-500 mt-0.5">Healthy Manufacturing Margin</p>
+                <div className={`p-4 rounded-xl border text-center ${darkMode ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-emerald-50 border-emerald-200'}`}>
+                  <span className={`text-[11px] font-bold uppercase ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Gross Margin %</span>
+                  <div className={`text-3xl font-black mt-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>{grossProfitMargin}%</div>
+                  <p className={`text-[10px] font-bold mt-0.5 ${darkMode ? 'text-emerald-500' : 'text-emerald-800'}`}>Healthy Manufacturing Margin</p>
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex justify-between text-slate-400">
+                  <div className={`flex justify-between ${darkMode ? 'text-slate-400' : 'text-slate-700 font-medium'}`}>
                     <span>Quoted Selling Price:</span>
-                    <span className="font-mono font-bold text-slate-200">₹{baseAmount.toLocaleString('en-IN')}</span>
+                    <span className={`font-mono font-bold ${darkMode ? 'text-slate-200' : 'text-slate-900'}`}>₹{baseAmount.toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="flex justify-between text-slate-400">
+                  <div className={`flex justify-between ${darkMode ? 'text-slate-400' : 'text-slate-700 font-medium'}`}>
                     <span>Estimated Total Cost:</span>
-                    <span className="font-mono font-bold text-rose-400">- ₹{totalCost.toLocaleString('en-IN')}</span>
+                    <span className={`font-mono font-bold ${darkMode ? 'text-rose-400' : 'text-rose-700'}`}>- ₹{totalCost.toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="pt-2 border-t border-slate-800 flex justify-between font-bold text-emerald-400">
+                  <div className={`pt-2 border-t flex justify-between font-bold ${darkMode ? 'border-slate-800 text-emerald-400' : 'border-slate-200 text-emerald-800'}`}>
                     <span>Gross Contribution:</span>
-                    <span className="font-mono">₹{grossProfit.toLocaleString('en-IN')}</span>
+                    <span className="font-mono text-sm">₹{grossProfit.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-slate-800/40 border border-slate-700 text-[11px] text-slate-400 leading-relaxed">
+                <div className={`p-3 rounded-xl border text-[11px] leading-relaxed ${
+                  darkMode ? 'bg-slate-800/40 border-slate-700 text-slate-400' : 'bg-amber-50 border-amber-200 text-amber-900 font-medium'
+                }`}>
                   💡 <strong>Corrugation Tip:</strong> Minimum target margin for customized 5-Ply corrugated boxes is 15-18%. This quote exceeds healthy benchmark targets.
                 </div>
               </div>
@@ -999,7 +1015,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
         <div className={`p-5 rounded-2xl border space-y-4 ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
           <div className="flex items-center justify-between">
             <h3 className={`text-sm font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-              <RotateCcw className="w-4 h-4 text-amber-400" />
+              <RotateCcw className={`w-4 h-4 ${darkMode ? 'text-amber-400' : 'text-amber-700'}`} />
               Quotation Revision History & Version Control
             </h3>
             <button
@@ -1010,10 +1026,10 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             </button>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-slate-700/50">
+          <div className={`overflow-x-auto rounded-xl border ${darkMode ? 'border-slate-700/50' : 'border-slate-200'}`}>
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className={`border-b font-bold uppercase tracking-wider ${darkMode ? 'border-slate-800 bg-slate-800/80 text-slate-400' : 'border-slate-200 bg-slate-50 text-slate-600'}`}>
+                <tr className={`border-b font-bold uppercase tracking-wider ${darkMode ? 'border-slate-800 bg-slate-800/80 text-slate-400' : 'border-slate-200 bg-slate-100 text-slate-700'}`}>
                   <th className="p-3">Revision</th>
                   <th className="p-3">Date</th>
                   <th className="p-3">Created By</th>
@@ -1022,20 +1038,20 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                   <th className="p-3">Status</th>
                 </tr>
               </thead>
-              <tbody className={`divide-y ${darkMode ? 'divide-slate-800' : 'divide-slate-100'}`}>
+              <tbody className={`divide-y ${darkMode ? 'divide-slate-800' : 'divide-slate-200'}`}>
                 {quote.revisions && quote.revisions.length > 0 ? (
                   quote.revisions.map((rev: any, idx: number) => (
                     <tr key={rev.id || idx} className={`transition-colors ${darkMode ? 'hover:bg-slate-800/50' : 'hover:bg-slate-50'}`}>
-                      <td className="p-3 font-mono font-bold text-teal-400">
+                      <td className={`p-3 font-mono font-bold ${darkMode ? 'text-teal-400' : 'text-teal-700'}`}>
                         Rev {rev.revisionNumber}
                         {rev.revisionNumber === quote.revision && (
-                          <span className="ml-2 px-1.5 py-0.5 rounded text-[9px] bg-emerald-500/20 text-emerald-400 font-extrabold">Current</span>
+                          <span className={`ml-2 px-1.5 py-0.5 rounded text-[9px] font-extrabold ${darkMode ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-800'}`}>Current</span>
                         )}
                       </td>
-                      <td className="p-3 text-slate-400">{rev.createdDate || 'N/A'}</td>
-                      <td className="p-3 font-semibold text-slate-300">{rev.createdBy || 'Sales Executive'}</td>
-                      <td className="p-3 font-mono font-bold text-emerald-400">₹{(rev.amount || baseAmount).toLocaleString('en-IN')}</td>
-                      <td className="p-3 text-slate-300">{rev.reason || 'Initial quotation base proposal'}</td>
+                      <td className={`p-3 ${darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}`}>{rev.createdDate || 'N/A'}</td>
+                      <td className={`p-3 font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>{rev.createdBy || 'Sales Executive'}</td>
+                      <td className={`p-3 font-mono font-bold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>₹{(rev.amount || baseAmount).toLocaleString('en-IN')}</td>
+                      <td className={`p-3 ${darkMode ? 'text-slate-300' : 'text-slate-800 font-medium'}`}>{rev.reason || 'Initial quotation base proposal'}</td>
                       <td className="p-3">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${getStatusBadge(rev.status || 'Active')}`}>
                           {rev.status || 'Active'}
@@ -1045,11 +1061,11 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                   ))
                 ) : (
                   <tr>
-                    <td className="p-3 font-mono font-bold text-teal-400">Rev 1 (Base)</td>
-                    <td className="p-3 text-slate-400">{quote.quotationDate || 'N/A'}</td>
-                    <td className="p-3 font-semibold text-slate-300">{quote.salesExecutive || 'Sales Executive'}</td>
-                    <td className="p-3 font-mono font-bold text-emerald-400">₹{baseAmount.toLocaleString('en-IN')}</td>
-                    <td className="p-3 text-slate-300">Initial Commercial Quote generated from Costing Model</td>
+                    <td className={`p-3 font-mono font-bold ${darkMode ? 'text-teal-400' : 'text-teal-700'}`}>Rev 1 (Base)</td>
+                    <td className={`p-3 ${darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}`}>{quote.quotationDate || 'N/A'}</td>
+                    <td className={`p-3 font-semibold ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>{quote.salesExecutive || 'Sales Executive'}</td>
+                    <td className={`p-3 font-mono font-bold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>₹{baseAmount.toLocaleString('en-IN')}</td>
+                    <td className={`p-3 ${darkMode ? 'text-slate-300' : 'text-slate-800 font-medium'}`}>Initial Commercial Quote generated from Costing Model</td>
                     <td className="p-3">
                       <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${getStatusBadge(quote.status)}`}>
                         {quote.status}
@@ -1067,28 +1083,28 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
       {activeTab === 'timeline' && (
         <div className={`p-5 rounded-2xl border space-y-4 ${darkMode ? 'bg-slate-900/90 border-slate-800' : 'bg-white border-slate-200 shadow-sm'}`}>
           <h3 className={`text-sm font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-            <Clock className="w-4 h-4 text-blue-400" />
+            <Clock className={`w-4 h-4 ${darkMode ? 'text-blue-400' : 'text-blue-700'}`} />
             Activity Log & Quotation Audit Trail
           </h3>
 
           <div className="space-y-2 text-xs">
             <div className={`p-3.5 rounded-xl border flex items-center justify-between ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
               <div>
-                <span className="font-bold text-teal-400">Quotation Created: {quote.quotationNumber}</span>
-                <p className="text-slate-400 text-[11px] mt-0.5">
+                <span className={`font-bold ${darkMode ? 'text-teal-400' : 'text-teal-700'}`}>Quotation Created: {quote.quotationNumber}</span>
+                <p className={`text-[11px] mt-0.5 ${darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}`}>
                   Initial revision base created for {quote.customerName} with total value ₹{baseAmount.toLocaleString('en-IN')}
                 </p>
               </div>
-              <span className="text-[11px] text-slate-500">{quote.quotationDate || 'Recent'}</span>
+              <span className={`text-[11px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-bold'}`}>{quote.quotationDate || 'Recent'}</span>
             </div>
 
             {quote.lead?.timeline?.map((t: any) => (
               <div key={t.id} className={`p-3.5 rounded-xl border flex items-center justify-between ${darkMode ? 'bg-slate-800/40 border-slate-700' : 'bg-slate-50 border-slate-200'}`}>
                 <div>
-                  <span className="font-bold text-emerald-400">{t.action}</span>
-                  <p className="text-slate-400 text-[11px] mt-0.5">{t.remarks || `Action by ${t.user}`}</p>
+                  <span className={`font-bold ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>{t.action}</span>
+                  <p className={`text-[11px] mt-0.5 ${darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}`}>{t.remarks || `Action by ${t.user}`}</p>
                 </div>
-                <span className="text-[11px] text-slate-500">{new Date(t.timestamp).toLocaleDateString()}</span>
+                <span className={`text-[11px] ${darkMode ? 'text-slate-500' : 'text-slate-600 font-bold'}`}>{new Date(t.timestamp).toLocaleDateString()}</span>
               </div>
             ))}
           </div>
@@ -1113,7 +1129,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
 
             <form onSubmit={handleCreateRevision} className="space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-slate-400 mb-1">New Total Quotation Amount (₹) *</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>New Total Quotation Amount (₹) *</label>
                 <input
                   type="number"
                   required
@@ -1127,7 +1143,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Reason for Revision *</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Reason for Revision *</label>
                 <select
                   value={revisionForm.reason}
                   onChange={e => setRevisionForm({ ...revisionForm, reason: e.target.value })}
@@ -1144,7 +1160,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Remarks & Commercial Notes</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Remarks & Commercial Notes</label>
                 <textarea
                   rows={2}
                   placeholder="e.g., Discount of 3% provided on volume commitment of 5000 pcs"
@@ -1156,7 +1172,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-slate-700">
+              <div className={`flex justify-end gap-3 pt-3 border-t ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
                 <button
                   type="button"
                   onClick={() => setShowRevisionModal(false)}
@@ -1184,16 +1200,16 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
       {showStatusModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
           <div className={`w-full max-w-md rounded-2xl border p-6 shadow-2xl ${darkMode ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-700">
+            <div className={`flex items-center justify-between mb-4 pb-3 border-b ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
               <h3 className="text-base font-extrabold">Change Quotation Status</h3>
-              <button onClick={() => setShowStatusModal(false)} className="p-1 text-slate-400 hover:text-white cursor-pointer">
+              <button onClick={() => setShowStatusModal(false)} className={`p-1 cursor-pointer ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-800'}`}>
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Target Status</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Target Status</label>
                 <select
                   value={newStatus}
                   onChange={e => setNewStatus(e.target.value)}
@@ -1211,7 +1227,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Status Remarks</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Status Remarks</label>
                 <textarea
                   rows={2}
                   placeholder="Enter remarks for audit history..."
@@ -1252,17 +1268,17 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
       {showConvertModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
           <div className={`w-full max-w-lg rounded-2xl border p-6 shadow-2xl ${darkMode ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-700">
+            <div className={`flex items-center justify-between mb-4 pb-3 border-b ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+                <div className={`p-2 rounded-xl ${darkMode ? 'bg-emerald-500/10 text-emerald-400' : 'bg-emerald-100 text-emerald-700'}`}>
                   <ShoppingBag className="w-5 h-5" />
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold">Convert Quotation to Sales Order</h3>
-                  <p className="text-xs text-slate-400">Forward confirmed specifications to Production Scheduling</p>
+                  <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-600 font-medium'}`}>Forward confirmed specifications to Production Scheduling</p>
                 </div>
               </div>
-              <button onClick={() => setShowConvertModal(false)} className="p-1 text-slate-400 hover:text-white cursor-pointer">
+              <button onClick={() => setShowConvertModal(false)} className={`p-1 cursor-pointer ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-800'}`}>
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -1270,7 +1286,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
             <form onSubmit={handleConvertToOrder} className="space-y-4 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-400 mb-1">Customer PO Number *</label>
+                  <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Customer PO Number *</label>
                   <input
                     type="text"
                     required
@@ -1283,7 +1299,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-400 mb-1">Target Delivery Date *</label>
+                  <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Target Delivery Date *</label>
                   <input
                     type="date"
                     required
@@ -1298,7 +1314,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-400 mb-1">Order Quantity (Boxes) *</label>
+                  <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Order Quantity (Boxes) *</label>
                   <input
                     type="number"
                     required
@@ -1311,7 +1327,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-400 mb-1">Unit Price (₹/Box) *</label>
+                  <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Unit Price (₹/Box) *</label>
                   <input
                     type="number"
                     step="0.01"
@@ -1325,14 +1341,16 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex justify-between items-center text-xs">
-                <span className="font-bold text-slate-300">Total Order Value:</span>
-                <span className="font-mono font-extrabold text-sm text-emerald-400">
+              <div className={`p-3 rounded-xl border flex justify-between items-center text-xs ${
+                darkMode ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-emerald-50 border-emerald-200'
+              }`}>
+                <span className={`font-bold ${darkMode ? 'text-slate-300' : 'text-slate-800'}`}>Total Order Value:</span>
+                <span className={`font-mono font-extrabold text-sm ${darkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>
                   ₹{(convertForm.quantity * convertForm.unitPrice).toLocaleString('en-IN')} (+ 18% GST)
                 </span>
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-slate-700">
+              <div className={`flex justify-end gap-3 pt-3 border-t ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
                 <button
                   type="button"
                   onClick={() => setShowConvertModal(false)}
@@ -1463,16 +1481,16 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
       {showEditModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
           <div className={`w-full max-w-lg rounded-2xl border p-6 shadow-2xl ${darkMode ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900'}`}>
-            <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-700">
+            <div className={`flex items-center justify-between mb-4 pb-3 border-b ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
               <h3 className="text-base font-extrabold">Edit Quotation Details</h3>
-              <button onClick={() => setShowEditModal(false)} className="p-1 text-slate-400 hover:text-white cursor-pointer">
+              <button onClick={() => setShowEditModal(false)} className={`p-1 cursor-pointer ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-400 hover:text-slate-800'}`}>
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <form onSubmit={handleUpdateQuotation} className="space-y-4 text-xs">
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Customer Name *</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Customer Name *</label>
                 <input
                   type="text"
                   required
@@ -1485,7 +1503,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Product Name / Specification *</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Product Name / Specification *</label>
                 <input
                   type="text"
                   required
@@ -1499,7 +1517,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-bold text-slate-400 mb-1">Quotation Amount (₹) *</label>
+                  <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Quotation Amount (₹) *</label>
                   <input
                     type="number"
                     required
@@ -1511,7 +1529,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block font-bold text-slate-400 mb-1">Valid Until Date</label>
+                  <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Valid Until Date</label>
                   <input
                     type="date"
                     value={editForm.validUntil}
@@ -1524,7 +1542,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
               </div>
 
               <div>
-                <label className="block font-bold text-slate-400 mb-1">Costing Summary / Notes</label>
+                <label className={`block font-bold mb-1 ${darkMode ? 'text-slate-400' : 'text-slate-700'}`}>Costing Summary / Notes</label>
                 <textarea
                   rows={2}
                   value={editForm.costingSummary}
@@ -1535,7 +1553,7 @@ export const QuotationWorkspacePage: React.FC<QuotationWorkspacePageProps> = ({
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-slate-700">
+              <div className={`flex justify-end gap-3 pt-3 border-t ${darkMode ? 'border-slate-700' : 'border-slate-200'}`}>
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
